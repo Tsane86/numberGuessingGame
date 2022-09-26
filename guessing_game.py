@@ -35,6 +35,8 @@ def start_game():
     attempts = 0
     
     # use a while loop to ask for input
+    print('Hello Player! Welcome to the Number guessing game!\n')
+    print('Please guess the number, between 1 and 10!')
     while game_continues:
         try:
             guess = int(input('Please input your guess between 1 and 10: '))
