@@ -49,8 +49,6 @@ def start_game():
             print(err)
         else:
             if guess == correct_answer:
-                # save the number of attempts to a list:
-
                 print(f'Got it! It took you {attempts} attempts!')
                 write_number_of_attempts_to_file(attempts)
                 attempts_list = read_in_file_as_list()
@@ -73,8 +71,7 @@ def write_number_of_attempts_to_file(attempts):
 def read_in_file_as_list():
     with open('attempts.txt', 'r') as f:
         attempts_list = f.readlines()
-        attempts_list = [int(attempt.strip()) for attempt in attempts_list]
-    return attempts_list
+        return [int(attempt.strip()) for attempt in attempts_list]
 
 # Kick off the program by calling the start_game function.
 start_game()
