@@ -71,7 +71,7 @@ def write_number_of_attempts_to_file(attempts):
 def read_in_file_as_list():
     with open('attempts.txt', 'r') as f:
         attempts_list = f.readlines()
-        return [int(attempt.strip()) for attempt in attempts_list]
+    return [int(attempt.strip()) for attempt in attempts_list]
 
 # Kick off the program by calling the start_game function.
 start_game()
