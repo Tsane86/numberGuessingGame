@@ -10,6 +10,7 @@ NOTE: If you strongly prefer to work locally on your own computer, you can total
 """
 
 import random
+from statistics import mean, median, mode
 
 def start_game():
     """Psuedo-code Hints
@@ -30,16 +31,16 @@ def start_game():
     """
     # write your code inside this function.
     # Create Random number #
-    correct_answer = random.randint(1,10)
+    correct_answer = random.randint(1,100)
     game_continues = True
     attempts = 0
     
     # use a while loop to ask for input
     print('Hello Player! Welcome to the Number guessing game!\n')
-    print('Please guess the number, between 1 and 10!')
+    print('Please guess the number, between 1 and 100!')
     while game_continues:
         try:
-            guess = int(input('Please input your guess between 1 and 10: '))
+            guess = int(input('Please input your guess between 1 and 100: '))
             if guess <= 0:
                 raise Exception('Not a positive number, please enter a positive number!')
         except ValueError:
@@ -48,7 +49,14 @@ def start_game():
             print(err)
         else:
             if guess == correct_answer:
-                print(f'Got it! It took you {attempts} attempts! Game Over!')
+                # save the number of attempts to a list:
+
+                print(f'Got it! It took you {attempts} attempts!')
+                write_number_of_attempts_to_file(attempts)
+                attempts_list = read_in_file_as_list()
+                print(f'Mean of attempts by players is {mean(attempts_list)}')
+                print(f'Median of attempts by players is {median(attempts_list)}')
+                print(f'Mode of attempts by players is {mode(attempts_list)}')
                 game_continues = False
             elif guess < correct_answer:
                 print(f'It\'s higher')
@@ -57,6 +65,16 @@ def start_game():
                 print('It\'s lower')
                 attempts += 1
 
+
+def write_number_of_attempts_to_file(attempts):
+    with open('attempts.txt', 'a') as f:
+        f.write(f'{attempts}' +'\n')
+
+def read_in_file_as_list():
+    with open('attempts.txt', 'r') as f:
+        attempts_list = f.readlines()
+        attempts_list = [int(attempt.strip()) for attempt in attempts_list]
+    return attempts_list
 
 # Kick off the program by calling the start_game function.
 start_game()
