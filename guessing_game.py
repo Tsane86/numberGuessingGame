@@ -55,7 +55,11 @@ def start_game():
                 print(f'Mean of attempts by players is {mean(attempts_list)}')
                 print(f'Median of attempts by players is {median(attempts_list)}')
                 print(f'Mode of attempts by players is {mode(attempts_list)}')
-                game_continues = False
+                if input('Play again? (y/n)') == 'y':
+                    start_game()
+                else:
+                    print('Game Over!')
+                    game_continues = False
             elif guess < correct_answer:
                 print(f'It\'s higher')
                 attempts += 1
